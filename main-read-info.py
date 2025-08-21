@@ -1,5 +1,7 @@
 import carla
-import math, time
+import sys
+import math
+import time
 
 CARLA_HOST = "192.168.0.70"
 def main():
@@ -14,16 +16,27 @@ def main():
     print("World: ", world)
     print("Map name: ", world.get_map().name)
 
-    # Get the driving (ego) vehicle
-    vehicles = world.get_actors().filter('vehicle.*')
+    # Get vehicle by id passed as --vehicle-id=123
     ego = None
-    for v in vehicles:
-        if 'role_name' in v.attributes and v.attributes['role_name'] in ('hero', 'ego'):
-            ego = v
+    vehicle_id = None
+    for arg in sys.argv[1:]:
+        if arg.startswith("--vehicle-id="):
+            try:
+                vehicle_id = int(arg.split("=", 1)[1])
+            except ValueError:
+                print("Invalid vehicle id value.")
             break
-    if ego is None and vehicles:
-        ego = vehicles[0]
 
+    if vehicle_id is not None:
+        actor = world.get_actor(vehicle_id)
+        if actor and actor.type_id.startswith("vehicle."):
+            ego = actor
+        else:
+            print(f"Actor id {vehicle_id} is not a vehicle or does not exist.")
+    else:
+        vehicle_id = 220
+        ego = world.get_actor(vehicle_id)
+        print(f"Using default vehicle id={vehicle_id}.")
     if ego is None:
         print("No vehicle found.")
     else:
