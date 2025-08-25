@@ -41,7 +41,10 @@ def main():
     if args.stop:
         print("Stopping the client...")
         #player.stop()
+        control = carla.VehicleControl(throttle=0.0, steer=0.0)
         player.set_autopilot(False)
+        player.apply_control(control)
+        #player.set_target_velocity(carla.Vector3D(0, 0, 0))
         return
     else:
         player.set_autopilot(True)

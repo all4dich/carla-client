@@ -1,9 +1,9 @@
 import carla
-
-CARLA_HOST = "192.168.0.99"
+import os
+CARLA_HOST = "192.168.0.70"
 def main():
     # Connect to the CARLA server
-    client = carla.Client(CARLA_HOST, 1403)
+    client = carla.Client(CARLA_HOST, 2000)
     client.set_timeout(10.0)
 
     # Get the world
