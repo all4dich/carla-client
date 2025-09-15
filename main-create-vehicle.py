@@ -1,9 +1,12 @@
+import os
+
 import carla
 import random
 
+CARLA_HOST = os.environ['CARLA_HOST']
 
 def main():
-    client = carla.Client('192.168.0.70', 2000)
+    client = carla.Client(CARLA_HOST, 2000)
     client.set_timeout(10.0)
     world = client.get_world()
 

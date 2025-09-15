@@ -1,11 +1,14 @@
 import carla
 import argparse
+import os
+
 argparse = argparse.ArgumentParser(description="CARLA Client Example")
 argparse.add_argument('--host', type=str, default='localhost', help='CARLA server host address')
 argparse.add_argument('--port', type=int, default=2000, help='CARLA server port number')
 argparse.add_argument('--stop', action='store_true', help='Stop the client after running the example')
 args = argparse.parse_args()
-CARLA_HOST = "192.168.0.70"
+CARLA_HOST = os.environ['CARLA_HOST']
+
 def main():
     # Connect to the CARLA server
     client = carla.Client(CARLA_HOST,   2000)
@@ -30,7 +33,7 @@ def main():
         print(" - ", actor)
     
     # Get the player vehicle
-    player = world.get_actors().filter('vehicle.*')[0]
+    player = world.get_actors().filter('vehicle.tesla.model3')[0]
     print("Player vehicle: ", player)
     # Print player vehicle's attributes
     print("Player vehicle attributes:")
