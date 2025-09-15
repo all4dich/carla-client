@@ -49,4 +49,18 @@ def main():
     else:
         player.set_autopilot(True)
         print("Player vehicle is now in autopilot mode.")
+        
+        # Get the traffic manager
+        traffic_manager = client.get_trafficmanager()
+        traffic_manager.set_synchronous_mode(True)
+        
+        # Configure the traffic manager for the player vehicle
+        traffic_manager.auto_lane_change(player, True)
+        traffic_manager.distance_to_leading_vehicle(player, 3.0)
+        traffic_manager.vehicle_percentage_speed_difference(player, 0.0)
+        traffic_manager.ignore_lights_percentage(player, 0.0)
+        traffic_manager.ignore_signs_percentage(player, 0.0)
+        traffic_manager.set_route(player, ["Left", "Right", "Straight"])
+        traffic_manager.collision_detection(player, world.get_actor(player.id), True)
+
 main()

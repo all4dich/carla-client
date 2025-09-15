@@ -35,25 +35,19 @@ def main():
     traffic_manager = client.get_trafficmanager()
     traffic_manager.set_synchronous_mode(True)
 
-    # ou might want to do something with the vehicle, e.g., set autopilot
-    vehicle.set_autopilot(True, traffic_manager.get_port())
-
-    # Set the vehicle to follow lanes
-    traffic_manager.auto_lane_change(vehicle, False)
-    traffic_manager.distance_to_leading_vehicle(vehicle, 3.0)
-    traffic_manager.vehicle_percentage_speed_difference(vehicle, 0.0)
-
-    # Set the vehicle to respect traffic lights
-    traffic_manager.ignore_lights_percentage(vehicle, 0.0)
-    traffic_manager.ignore_signs_percentage(vehicle, 0.0)
-
-    # SEt the vehicle to avoid collisions
-    traffic_manager.collision_detection(vehicle, True)
-    # Set the vehicle to avoid pedestrians
-    traffic_manager.pedestrian_detection(vehicle, True)
-    # Set the vehicle to turn left or right at intersections
-    traffic_manager.set_path_interpolation_distance(vehicle, 2.0)
-    print("Vehicle is now in autopilot mode.")
+#    # ou might want to do something with the vehicle, e.g., set autopilot
+#    vehicle.set_autopilot(True, traffic_manager.get_port())
+#
+#    # Set the vehicle to follow lanes
+#    traffic_manager.auto_lane_change(vehicle, False)
+#    traffic_manager.distance_to_leading_vehicle(vehicle, 3.0)
+#    traffic_manager.vehicle_percentage_speed_difference(vehicle, 0.0)
+#
+#    # Set the vehicle to respect traffic lights
+#    traffic_manager.ignore_lights_percentage(vehicle, 0.0)
+#    traffic_manager.ignore_signs_percentage(vehicle, 0.0)
+#
+#    print("Vehicle is now in autopilot mode.")
 
     # Clean up (important in CARLA)
     # input("Press Enter to destroy vehicle and exit...")
